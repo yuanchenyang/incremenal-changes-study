@@ -12,3 +12,6 @@ __pycache__
 *.swp
 *.log
 *.out
+
+# Project specific
+results.txt
