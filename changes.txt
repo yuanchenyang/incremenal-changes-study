@@ -1,0 +1,67 @@
+Top 20 changes:
+display         3429
+opacity         3428
+position        2144
+left            1843
+top             1337
+visibility      1171
+height          885
+width           649
+transform       640
+margin-left     401
+overflow        249
+z-index         234
+margin-top      207
+padding         153
+margin          152
+margin-bottom   127
+padding-bottom  96
+border          92
+right           84
+padding-top     83
+
+display:     none -> block/inline, block -> '' (73% from ebay/tmall)
+  (u'http://us.weibo.com', 123)
+  (u'http://www.hao123.com', 288)
+  (u'http://www.tmall.com', 1208)
+  (u'http://www.ebay.com', 1353)
+opacity:     increasing/decreasing opacity
+  (u'http://www.bing.com', 276)
+  (u'http://us.weibo.com', 554)
+  (u'http://www.tmall.com', 598)
+  (u'http://www.hao123.com', 1726)
+position:    '' -> absolute/relative , absolute -> ''
+  (u'http://www.qq.com', 44)
+  (u'http://us.weibo.com', 86)
+  (u'http://www.tmall.com', 879)
+  (u'http://www.ebay.com', 984)
+left:  changing values
+  (u'http://2014.hao123.com', 162)
+  (u'http://2014.qq.com', 215)
+  (u'http://us.weibo.com', 240)
+  (u'http://www.ebay.com', 697)
+top:   changing values
+  (u'http://2014.qq.com', 115)
+  (u'http://www.hao123.com', 199)
+  (u'http://us.weibo.com', 275)
+  (u'http://www.ebay.com', 521)
+visibility:  mostly hidden -> visible / ''
+  (u'http://www.bing.com', 19)
+  (u'https://www.linkedin.com', 66)
+  (u'http://www.ebay.com', 112)
+  (u'http://www.tmall.com', 874)
+height:      Either changing values or removing/adding, or changing to auto
+  (u'http://www.taobao.com', 75)
+  (u'http://www.tmall.com', 83)
+  (u'http://www.hao123.com', 203)
+  (u'http://www.ebay.com', 347)
+width: Same as height
+  (u'https://www.linkedin.com', 37)
+  (u'http://www.tmall.com', 91)
+  (u'http://us.weibo.com', 126)
+  (u'http://www.ebay.com', 177)
+margin-left: Shifting values
+  (u'https://www.facebook.com', 14)
+  (u'http://2014.hao123.com', 30)
+  (u'https://login.live.com', 100)
+  (u'http://www.taobao.com', 225)
