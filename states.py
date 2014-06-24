@@ -56,3 +56,44 @@ def states(summary):
             states.append(x)
 
     return states
+
+clusterId = 0
+
+def dotfile(filename, states):
+    def uniqueId():
+        global clusterId
+        clusterId += 1
+        return str(clusterId)
+
+    text = "digraph G{\n"
+    for s in states:
+        text += "subgraph cluster_" + uniqueId() + " {\n"
+        text += "color = blue;\n"
+
+        for n in s:
+            text += "subgraph cluster_" + uniqueId() + " {\n"
+            text += "color = black;\n"
+            text += 'label = "Node #' + n + '";\n'
+
+            for a in s[n]:
+                text += "subgraph cluster_" + uniqueId() + " {\n"
+                text += "style = filled;\n"
+                text += "color = gray;\n"
+                text += 'label = "' + a + '";\n'
+
+                for v in s[n][a]:
+                    # Fix bug with lots of class changes that aren't actually changes
+                    if v[0] != v[1]:
+                        text += '"' + v[0] + '" -> "' + v[1] + '";\n'
+
+                text += "}\n"
+            text += "}\n"
+
+        text += "}\n"
+    text += "}\n"
+
+    f = open(filename, 'w')
+    f.write(text)
+    f.close()
+
+dotfile('graph.dot', states(summarize(get_results())))
