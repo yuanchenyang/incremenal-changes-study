@@ -30,10 +30,26 @@ if __name__ == "__main__":
     res = get_results()
     accu = accumulate(res)
 
-    print "Total added:\t", \
-      accu(lambda o: o['addedNodes'], add)
-    print "Total removed:\t",\
-      accu(lambda o: o['removedNodes'], add)
+#    print "Average added:\t", \
+#      accu(lambda o: o['addedNodes'], add) / len(res)
+#    print "Average removed:\t",\
+#      accu(lambda o: o['removedNodes'], add) / len(res)
+
+    num_buckets = 100
+    max_added = accu(lambda o : o['addedNodes'], max)
+    max_removed = accu(lambda o : o['removedNodes'], max)
+
+    print "Nodes Added:"
+    for i in range(num_buckets):
+        range_min = (max_added / num_buckets) * i
+        range_max = (max_added / num_buckets) * (i+1)
+
+        print str(range_min) + "-" + str(range_max) + ":\t",\
+                reduce(lambda x, y: x + 1, \
+                filter(lambda x: x >= range_min and x < range_max, \
+                map(lambda x: x['addedNodes'], res)), 0)
+
+
 
     style_changes = []
     class_changes = []

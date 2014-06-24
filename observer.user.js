@@ -11,6 +11,7 @@
 
 MutationObserver = window.MutationObserver || window.WebKitMutationObserver;
 var NODE_CHANGES = "#nodeChanges";
+var nodeUniqueId = 0;
 
 var observer = new window.MutationObserver(function(mutations, observer) {
     // fired when a mutation occurs
@@ -23,12 +24,13 @@ var observer = new window.MutationObserver(function(mutations, observer) {
     mutations.forEach(function(m) {
         if (m.type == "attributes") {
             if (m.attributeName == "style") {
-                add_style_diff(Changes, m.oldValue, m.target.style);
+                add_style_diff(Changes, m.oldValue, m.target.style, m.target);
             } else {
                 add_diff(Changes,
                          "@" + m.attributeName,
                          m.oldValue,
-                         m.target.attributes[m.attributeName].value);
+                         m.target.attributes[m.attributeName].value,
+                         m.target);
             }
         } else if (m.type == "childList") {
             add_diff(Changes,
@@ -55,15 +57,24 @@ function no_ws(s) {
     return s.replace(/\s/g, "");
 }
 
-function add_diff(Changes, attrName, oldAttr, newAttr) {
+function add_diff(Changes, attrName, oldAttr, newAttr, target) {
     var count = GM_getValue(attrName, 0);
     GM_setValue(attrName, count + 1);
+    var nodeNum = 0;
+
+    if (target.hasAttribute("data-uniqueNum")) {
+        nodeNum = target.getAttribute("data-uniqueNum");
+    } else {
+        target.setAttribute("data-uniqueNum", uniqueNodeId);
+        nodeNum = target.getAttribute("data-uniqueNum");
+        nodeUniqueId += 1;
+    }
 
     if (attrName == NODE_CHANGES) {
         Changes.addedNodes += newAttr;
         Changes.removedNodes += oldAttr;
     } else {
-        Changes.deltas.push([attrName, oldAttr, newAttr]);
+        Changes.deltas.push([attrName, nodeNum, oldAttr, newAttr]);
     }
 }
 
@@ -82,7 +93,7 @@ function parse_styles(styleString) {
     return res;
 }
 
-function add_style_diff(Changes, oldValue, newStyle) {
+function add_style_diff(Changes, oldValue, newStyle, target) {
 
     var oldStyle = parse_styles(oldValue);
 
@@ -96,7 +107,7 @@ function add_style_diff(Changes, oldValue, newStyle) {
             // console.log("@@@@", oldStyle[attrName], no_ws(newStyle[attrName]));
             var oldattr = oldStyle[attrName];
             if (oldattr != newattr) {
-                add_diff(Changes, attrName, oldattr, newattr);
+                add_diff(Changes, attrName, oldattr, newattr, target);
             }
             delete oldStyle[attrName];
         } else {
@@ -105,7 +116,7 @@ function add_style_diff(Changes, oldValue, newStyle) {
     }
 
     for (var remaining in oldStyle) {
-        add_diff(Changes, remaining, oldStyle[remaining], "");
+        add_diff(Changes, remaining, oldStyle[remaining], "", target);
     }
 }
 
