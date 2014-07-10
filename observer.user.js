@@ -50,7 +50,7 @@ function add_diff(Changes, attrName, oldAttr, newAttr, target) {
     var count = GM_getValue(attrName, 0);
     GM_setValue(attrName, count + 1);
     var nodeNum = 0;
-    console.log("Adding diff " + attrName + ":" + oldAttr + " -> " + newAttr);
+    // console.log("Adding diff " + attrName + ":" + oldAttr + " -> " + newAttr);
     if (target.hasAttribute('data-uniqueNum')) {
         nodeNum = target.getAttribute('data-uniqueNum');
     } else {
@@ -58,7 +58,7 @@ function add_diff(Changes, attrName, oldAttr, newAttr, target) {
         target.setAttribute('data-uniqueNum', nodeNum);
         nodeUniqueId += 1;
     }
-    console.log("Still adding diff");
+    // console.log("Still adding diff");
     if (attrName == NODE_CHANGES) {
         Changes.addedNodes += newAttr;
         Changes.removedNodes += oldAttr;

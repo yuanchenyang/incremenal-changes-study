@@ -84,7 +84,7 @@ def dotfile(filename, states):
                 for v in s[n][a]:
                     # Fix bug with lots of class changes that aren't actually changes
                     if v[0] != v[1]:
-                        text += '"' + v[0] + '" -> "' + v[1] + '";\n'
+                        text += '"' + str(v[0]) + '" -> "' + str(v[1]) + '";\n'
 
                 text += "}\n"
             text += "}\n"

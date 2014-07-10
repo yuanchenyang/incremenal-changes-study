@@ -4,7 +4,7 @@ from itertools import groupby
 
 def get_results():
     objs = []
-    with open("results.txt") as f:
+    with open("results-top-25-webpages.txt") as f:
         for line in f:
             objs.append(json.loads(line))
     return objs
@@ -70,7 +70,7 @@ if __name__ == "__main__":
     sorted_style = sorted(style_changes, key=K(0))
     style_groups = to_dict(groupby(sorted_style, K(0)))
     style_counts = counts(style_changes, K(0))
-    for name, value in style_counts[-20:]:
+    for name, value in style_counts[-40:]:
         print name, "\t", value
 
     #pl(count_lists(to_dict(groupby(sorted(style_groups["margin"], key=K(3)), K(3)))))
