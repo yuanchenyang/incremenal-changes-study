@@ -99,15 +99,6 @@ function getDomPosition(target) {
     return pos;
 }
 
-// Reverse of getDomPosition
-function getDomElement(pos) {
-    var target = document.childNodes[1];
-    for (var i = pos.length-1; i >=0 ; i--) {
-        target = target.childNodes[pos[i]];
-    }
-    return target;
-}
-
 send("start_new_session", {url: window.location, id: uniqueNum},
      {domstring: S.serializeToString(document)});
 

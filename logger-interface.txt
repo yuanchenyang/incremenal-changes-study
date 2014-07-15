@@ -1,0 +1,18 @@
+record =
+{
+  type     : "attributes" | "childList"
+  position : [int]
+  data     : if type == "attributes"
+             {
+               attrName: string
+               oldValue: string
+               newValue: string
+             }
+             if type == "childList"
+             {
+               added   : [serializedXML]
+               removed : [serializedXML]
+               prev    : int
+               next    : int
+             }
+}
